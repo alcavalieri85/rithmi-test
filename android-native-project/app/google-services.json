@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1014739173769",
+    "firebase_url": "https://rithmi-b826f.firebaseio.com",
+    "project_id": "rithmi-b826f",
+    "storage_bucket": "rithmi-b826f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014739173769:android:8a2e12949934ca0b",
+        "android_client_info": {
+          "package_name": "com.example.rithmi_android_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRHhrDNdakwCDEITM9pWGN0W_V4-rp6fM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014739173769-mjdlp6a2r0n07vq7jnsf6m8k6uoi1r6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
