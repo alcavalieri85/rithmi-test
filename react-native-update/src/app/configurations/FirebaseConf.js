@@ -40,7 +40,12 @@ export const authEmailAndPassword = (email, password) => {
       const user = firebase.auth().currentUser;
       Alert.alert("Welcome " + user.email);
     })
-    .catch(error => Alert.alert("Quieres crear una cuenta"))
+    .catch(error => {
+      if (error.code === 'auth/wrong-password')
+        Alert.alert("The Password is Incorrect, try with the right one!");
+      else if(error.code === 'auth/user-not-found')
+        Alert.alert("The User is not Found. Sign-In!")
+    });
 }
 
 
