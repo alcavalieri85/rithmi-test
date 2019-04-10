@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Text, Image, View, Button } from 'react-native';
-import { configurationFirebase, authEmailAndPassword } from '../configurations/FirebaseConf';
+import { configurationFirebase, authEmailAndPassword, createEmailandPassword } from '../configurations/FirebaseConf';
 import styles from '../styles/Style';
 import { ValidationEmail, ValidationPassword } from '../utilities/ValidationForm';
 import FloatingLabel from 'react-native-floating-labels';
@@ -21,7 +21,8 @@ export default class LoginForm extends React.Component {
             email: '',
             password: '',
             errorMessageEmail: null,
-            errorMessagePassword: null
+            errorMessagePassword: null,
+            buttonSubmit: 'INICIAR SESìON'
         };
     }
 
@@ -37,8 +38,17 @@ export default class LoginForm extends React.Component {
         configurationFirebase();
         const email = this.state.email;
         const password = this.state.password;
-        if (ValidationEmail(email) === true && ValidationPassword(password) === true)
-            authEmailAndPassword(email, password);
+        //if the validation is correct
+        if (ValidationEmail(email) === true && ValidationPassword(password) === true){
+            //call to create a new user
+            if(this.state.buttonSubmit === 'CREAR CUENTA'){
+                createEmailandPassword(email, password);
+            }
+            //change button to render create a new user
+            else if(!authEmailAndPassword(email, password)){
+                setTimeout(() => {this.setState({ buttonSubmit: "CREAR CUENTA" })},3000);
+            }            
+        }            
         else if (ValidationEmail(email) !== true) {
             this.setState({ errorMessageEmail: ValidationEmail(email) });
             this.setState({ errorMessagePassword: null });
@@ -109,9 +119,9 @@ export default class LoginForm extends React.Component {
                 <View style={styles.submit}>
                     <Button
                         color="#05BAC3"
-                        title="INICIAR SESìON"
+                        title={this.state.buttonSubmit}
                         onPress={this.handleLogin} />
-                </View>
+                </View>                
             </View>
         );
     }

@@ -43,9 +43,30 @@ export const authEmailAndPassword = (email, password) => {
     .catch(error => {
       if (error.code === 'auth/wrong-password')
         Alert.alert("The Password is Incorrect, try with the right one!");
-      else if(error.code === 'auth/user-not-found')
-        Alert.alert("The User is not Found. Sign-In!")
+      else if(error.code === 'auth/user-not-found'){
+        Alert.alert("The User is not Found. Sign-In!");
+        return false;
+      }
+        
     });
+}
+
+/**this functions has two arguments. Email and password. 
+ * Create a new account FireBase auth database 
+ * show a Welcome alert with user email.
+ * If not, beacuse some errors in the database, show an Alert
+ * with a text to sigin.
+*/
+export const createEmailandPassword = (email,password) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(() => {
+    //Send a user a verification email
+    const user = firebase.auth().currentUser;
+    Alert.alert("Welcome " + user.email);
+  }).catch(error => {
+    // Handle Errors here.   
+    Alert.alert(error.code);
+  });
 }
 
 
