@@ -9,6 +9,7 @@ import { Text, TextInput, View, Button } from 'react-native';
 import { configurationFirebase, authEmailAndPassword } from '../configurations/FirebaseConf';
 import styles from '../styles/Style';
 import { ValidationLogIn } from '../utilities/ValidationForm';
+import FloatingLabel from 'react-native-floating-labels';
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -53,21 +54,23 @@ export default class LoginForm extends React.Component {
                         {this.state.errorMessage}
                     </Text>
                 }
-                <TextInput
-                    placeholder="Email"
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    onChangeText={email => this.setState({ email })}
+                <FloatingLabel
+                    labelStyle={styles.labelInput}
+                    inputStyle={styles.input}
+                    style={styles.formInput}
                     value={this.state.email}
-                />
-                <TextInput
+                    onChangeText={email => this.setState({ email })}
+                >Email</FloatingLabel>
+
+                <FloatingLabel
                     secureTextEntry
-                    placeholder="Password"
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    onChangeText={password => this.setState({ password })}
+                    labelStyle={styles.labelInput}
+                    inputStyle={styles.input}
+                    style={styles.formInput}
                     value={this.state.password}
-                />
+                    onChangeText={password => this.setState({ password })}
+                >Password</FloatingLabel>
+
                 <View style={styles.submit}>
                     <Button
                         color="#05BAC3"

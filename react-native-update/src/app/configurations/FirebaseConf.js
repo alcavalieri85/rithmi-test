@@ -40,7 +40,7 @@ export const authEmailAndPassword = (email, password) => {
       const user = firebase.auth().currentUser;
       Alert.alert("Welcome " + user.email);
     })
-    .catch(error => Alert.alert("Quieres crear una cuenta?"))
+    .catch(error => Alert.alert("Quieres crear una cuenta"))
 }
 
 

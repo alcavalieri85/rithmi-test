@@ -14,13 +14,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    marginBottom: 10
-  },
   image: {
     width: 140,
     height: 100,
@@ -29,5 +22,17 @@ export default StyleSheet.create({
   submit: {
     marginTop: 50,
     width: '70%'
+  },
+  formInput: {
+    borderBottomWidth: 1.5, 
+    marginLeft: 0,
+    borderColor: 'white',
+    width: '90%'
+  },
+  input: {
+    borderWidth: 0
+  },
+  labelInput: {
+    color: 'white',
   }
 });
