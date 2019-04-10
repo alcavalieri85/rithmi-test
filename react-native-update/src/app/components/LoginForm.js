@@ -5,10 +5,10 @@
  */
 
 import React from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
+import { Text, Image, View, Button } from 'react-native';
 import { configurationFirebase, authEmailAndPassword } from '../configurations/FirebaseConf';
 import styles from '../styles/Style';
-import { ValidationLogIn } from '../utilities/ValidationForm';
+import { ValidationEmail, ValidationPassword } from '../utilities/ValidationForm';
 import FloatingLabel from 'react-native-floating-labels';
 
 export default class LoginForm extends React.Component {
@@ -20,7 +20,8 @@ export default class LoginForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            errorMessage: null
+            errorMessageEmail: null,
+            errorMessagePassword: null
         };
     }
 
@@ -28,31 +29,48 @@ export default class LoginForm extends React.Component {
      * the submit Button's Login. 
      * Call configurationFirebase() to signin the Firebase account. 
      * Get the email and password from value of TextInput
-     * Check if ValidationLogIn() return true. If does call authEmailAndPassword()
-     * to render in Farebase Database
+     * Check if ValidationEmail() and ValidationPassword() return true. 
+     * If does call authEmailAndPassword() to render in Farebase Database
      * If not add to errorMessage an massage error key
      */
     handleLogin = () => {
         configurationFirebase();
         const email = this.state.email;
         const password = this.state.password;
-        if (ValidationLogIn(email, password) === true)
+        if (ValidationEmail(email) === true && ValidationPassword(password) === true)
             authEmailAndPassword(email, password);
-        else
-            this.setState({ errorMessage: ValidationLogIn(email, password) });
+        else if (ValidationEmail(email) !== true) {
+            this.setState({ errorMessageEmail: ValidationEmail(email) });
+            this.setState({ errorMessagePassword: null });
+        }
+        else if (ValidationEmail(password) !== true) {
+            this.setState({ errorMessagePassword: ValidationPassword(password) });
+            this.setState({ errorMessageEmail: null });
+        }
     }
 
     /**Render the View of the Login Form with two TextInput for the Email and Password
      * and a submit Button that with an Onpress call the handleLogin() function.
      */
     render() {
-        return (
+        return (            
             <View style={styles.containerLogin}>
+                {/* Text error showed when Email is wrong */}
                 {
-                    this.state.errorMessage &&
-                    <Text style={{ color: 'red' }}>
-                        {this.state.errorMessage}
-                    </Text>
+                    this.state.errorMessageEmail &&
+                    <View style={{ width: '100%' }}>
+                        <Image
+                            style={styles.iconError}
+                            source={{ uri: 'https://www.daviddenies.com/wp-content/uploads/2015/04/sign-computer-icon-symbol-signs-info-information.png' }}
+                        />
+                        <Text style={styles.labelError}>
+                            {this.state.errorMessageEmail}
+                        </Text>
+                        <Image
+                            style={styles.arrowError}
+                            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Armed_forces_red_triangle.svg/200px-Armed_forces_red_triangle.svg.png' }}
+                        />
+                    </View>
                 }
                 <FloatingLabel
                     labelStyle={styles.labelInput}
@@ -60,8 +78,25 @@ export default class LoginForm extends React.Component {
                     style={styles.formInput}
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })}
-                >Email</FloatingLabel>
+                >Email </FloatingLabel>
 
+                {/* Text error showed when Password is wrong */}
+                {
+                    this.state.errorMessagePassword &&
+                    <View style={{ width: '100%' }}>
+                        <Image
+                            style={styles.iconError}
+                            source={{ uri: 'https://www.daviddenies.com/wp-content/uploads/2015/04/sign-computer-icon-symbol-signs-info-information.png' }}
+                        />
+                        <Text style={styles.labelError}>
+                            {this.state.errorMessagePassword}
+                        </Text>
+                        <Image
+                            style={styles.arrowError}
+                            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Armed_forces_red_triangle.svg/200px-Armed_forces_red_triangle.svg.png' }}
+                        />
+                    </View>
+                }
                 <FloatingLabel
                     secureTextEntry
                     labelStyle={styles.labelInput}

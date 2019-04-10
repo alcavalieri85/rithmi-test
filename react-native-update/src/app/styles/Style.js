@@ -34,5 +34,30 @@ export default StyleSheet.create({
   },
   labelInput: {
     color: 'white',
+  },
+  labelError:{
+    color: '#595566', 
+    position: 'absolute', 
+    top: 65, 
+    right: 25, 
+    backgroundColor: 'white', 
+    padding: 8, 
+    borderTopWidth: 1, 
+    borderColor: 'red'
+  },
+  iconError:{
+    width: 20, 
+    height: 20, 
+    position: 'absolute', 
+    top: 35, 
+    right: 25
+  },
+  arrowError: {
+    width:10, 
+    height:5, 
+    position: 'absolute', 
+    top: 60, 
+    right:30,
+    zIndex: 1000
   }
 });
