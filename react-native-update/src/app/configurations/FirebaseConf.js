@@ -13,7 +13,7 @@ import { Alert } from 'react-native';
  * the duplicated errors*/
 export const configurationFirebase = () => {
   const config = {
-    apiKey: "AIzaSyDgWVgQ52EwmVQGRReIQYxNGHbwANklSlQ",
+    apiKey: "<APIKEY>",
     authDomain: "rithmi-b826f.firebaseapp.com",
     databaseURL: "https://rithmi-b826f.firebaseio.com",
     projectId: "rithmi-b826f",
